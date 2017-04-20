@@ -1,0 +1,8 @@
+libreoffice --headless --convert-to csv $filename --outdir $outdir
+libreoffice --headless --convert-to pdf "医享网接口访问流程文档.doc"
+
+soffice --headless --convert-to pdf "医享网接口访问流程文档.doc"
+
+	
+Starting OpenOffice.org as a service:
+soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard

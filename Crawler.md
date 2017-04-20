@@ -1,0 +1,1 @@
+在Nutch的进化过程中，产生了Hadoop、Tika、Gora和Crawler Commons四个Java开源项目。如今这四个项目都发展迅速，极其火爆，尤其是Hadoop，其已成为大规模数据处理的事实上的标准。Tika使用多种现有的开源内容解析项目来实现从多种格式的文件中提取元数据和结构化文本，Gora支持把大数据持久化到多种存储实现，Crawler Commons是一个通用的网络爬虫组件。

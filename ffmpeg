@@ -1,0 +1,93 @@
+INSTALL:
+Fedora:
+./configure  --enable-x11grab --enable-libpulse --enable-gpl --enable-libx264
+sudo dnf install libxcb libxcb-devel
+sudo dnf install pulseaudio-libs-devel
+sudo dnf install alsa-lib  alsa-lib-devel
+===============================================================================================================
+1.Capture without audio
+ ffmpeg -f x11grab -r 25 -s 1920x1080 -i :0.0+0,0 -vcodec libx264 -preset ultrafast -threads 0 video.mkv
+ 
+ Compress and convert to MP4 format (Youtube ready):
+  ffmpeg -i video.mkv -vcodec libx264 -vpre hq -crf 22 -threads 0 video.mp4
+
+2.Capturing with audio
+ffmpeg -f alsa -i pulse -f x11grab -r 25 -s 1920x1080 -i :0.0+0,0 -acodec pcm_s16le    -vcodec libx264  -preset ultrafast -threads 0 output.mkv
+
+=================================================================
+use xdpyinfo command to find out current screen resolution:
+xdpyinfo  | grep 'dimensions:'
+xrandr | grep '*'
+
+
+===========================================================================================================================
+Linux
+
+Use the x11grab device:
+
+ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 output.mp4
+This will grab the image from desktop, starting with the upper-left corner at (x=100, y=200) with the width and height of 1024x768.
+
+If you need audio too you can use ALSA (see Capture/ALSA for more info):
+
+ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 -f alsa -ac 2 -i hw:0 output.mkv
+Or the pulse input device:
+
+ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 -f pulse -ac 2 -i default output.mkv
+OS X
+
+Use the avfoundation device:
+
+ffmpeg -f avfoundation -list_devices true -i ""
+This will enumerate all the available input devices including screens ready to be captured.
+
+Once you've figured out the device index corresponding to the screen to be captured use:
+
+ffmpeg -f avfoundation -i "<screen device index>:<audio device index>" out.mov
+This will capture the screen from <screen device index> and audio from <audio device index> into the output file out.mov.
+
+Windows
+
+Use a ​dshow ​device:
+
+ffmpeg -f dshow -i video="screen-capture-recorder" output.flv
+This will grab the image from entire desktop. You can refer to a ​list of alternative devices.
+
+If you need audio too:
+
+ffmpeg -f dshow -i video="UScreenCapture":audio="Microphone" output.flv
+If you want to capture the audio that is playing from your speakers you may also need to configure so-called "Stereo Mix" device.
+
+or
+
+ffmpeg -f dshow -i video="UScreenCapture" -f dshow -i audio="Microphone" output.flv
+You can list your devices with:
+
+ffmpeg -list_devices true -f dshow -i dummy
+There is also the gdigrab input device you can use to grab video from the screen in Windows.
+
+General notes
+
+If you have a slow computer, it will not be smart to grab and encode your video at the same time, because slow CPU will not be able to do this. In that case, first grab all you need and save it as uncompressed video/audio and when you finish the grabbing process then start converting it to whatever you need:
+
+Linux:
+
+ffmpeg -framerate 25 -video_size 1024x768 -f x11grab -i :0.0+100,200 -f alsa -ac 2 -i pulse -vcodec libx264 -crf 0 -preset ultrafast -acodec pcm_s16le output.mkv
+ffmpeg -i output.mkv -acodec ... -vcodec ... final.mkv
+Windows:
+
+ffmpeg -f dshow -i video="screen-capture-recorder":audio="Microphone" -vcodec libx264 -crf 0 -preset ultrafast -acodec pcm_s16le output.mkv
+ffmpeg -i output.flv -acodec ... -vcodec ... final.mkv
+Lossless recording
+
+If you want a perfect recording of your desktop, x264 can help. Use lossless encoding, e.g.:
+
+ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast capture.mkv
+-qp 0 tells x264 to encode in lossless mode, -preset ultrafast advises it to do so fast.
+
+The encoder should be fast enough on most modern hardware to record without any framedrop, and even leave enough CPU headroom for other applications.
+
+If you're going to archive the recording or are concerned about file size, re-encode it losslessly again but with a slower preset. Note that since the initial recording was lossless, and the re-encode is lossless too, no quality loss is introduced in this process in any way.
+
+ffmpeg -i capture.mkv -c:v libx264 -qp 0 -preset veryslow capture_smaller.mkv
+See Encode/H.264 for more info and examples.

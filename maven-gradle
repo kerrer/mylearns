@@ -1,0 +1,48 @@
+mvn archetype:generate -DgroupId=io.netty.example -DartifactId=Netty -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+mvn eclipse:eclipse
+mvn eclipse:eclipse -DdownloadSources=false -DdownloadJavadocs=false
+mvn eclipse:clean
+mvn clean package
+mvn -Dmaven.test.skip=true install
+mvn -Dmaven.test.skip=true clean package -P assemble
+mvn -Dmaven.test.skip=true install
+mvn dependency:copy-dependencies
+
+mvn archetype:generate -DgroupId=org.red5.core -DartifactId=myapp -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+mvn eclipse:eclipse -Dwtpversion=2.0
+mvn deploy
+mvn dependency:list
+mvn dependency:tree
+mvn -U clean package -Dmaven.test.skip=true enforcer:enforce -DcheckDeployRelease_skip=true -Denforcer.skip=false
+mvn dependency:tree -Dverbose -Dincludes=javax.servlet Dexcludes=.....
+
+mvn -Dtest=RedisTest test
+mvn -Dtest=RedisTest#testRedisConnect2  clean  test
+mvn jetty:run
+mvn tomcat7:delopy
+mvn tomcat7:run
+mvn glassfish:deploy
+mvn glassfish:undeploy
+mvn clean package embedded-glassfish:run
+mvn -Dmaven.test.skip=true jboss-as:deploy
+
+mvn -Dmaven.test.skip=true clean package -P assemble
+
+mvn clean compile exec:java -Dexec.mainClass="com.max.shiro.Tutorial"
+mvn -Dmaven.test.skip=true clean package -P assemble
+===================
+gradle eclipse
+gradle build
+gradle wrapper
+gradle clean
+gradle -Dtest.single=KnightJavaConfigInjectionTest test
+gradle -Dtest.single=KnightJavaConfigInjectionTest test -i
+gradle task
+gradle tasks --all
+=====================
+gradlefx
+gradle build
+gradle clean build
+gradle flashbuilder
+gradle createHtmlWrapper

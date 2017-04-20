@@ -1,0 +1,1 @@
+wxwidgets是一个 c++编写的用来提供gui开发的框架。它包含一个可以支持现今几乎所有操作系统（Version 2 currently supports all desktop versions of MS Windows, Unix with GTK+, Unix with Motif, and MacOS. An OS/2 port is in progress.）的GUI库和其他一些很有用的工具，提供了类似MFC的功能

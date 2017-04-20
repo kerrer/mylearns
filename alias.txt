@@ -1,0 +1,347 @@
+## -----------------------------------------------------------------------------------------
+## Created by Vivek Gite <vivek@nixcraft.com>
+## See for more info: http://www.cyberciti.biz/tips/linux-unix-osx-bash-shell-aliases.html
+## Note: I work a lot with Amazon EC2/CDN/Akamai/Server Backups etc so source code of those 
+## scripts not included in this file. YMMV.
+## -----------------------------------------------------------------------------------------
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias l.='ls -d .* --color=auto'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias bc='bc -l'
+alias sha1='openssl sha1'
+alias mkdir='mkdir -pv'
+alias diff='colordiff'
+alias mount='mount |column -t'
+alias h='history'
+alias j='jobs -l'
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+alias vi=vim
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+alias edit='vim'
+alias ping='ping -c 5'
+alias fastping='ping -c 100 -s.2'
+alias ports='netstat -tulanp'
+alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
+alias wakeupnas02='/usr/bin/wakeonlan 00:11:32:11:15:FD'
+alias wakeupnas03='/usr/bin/wakeonlan 00:11:32:11:15:FE'
+alias ipt='sudo /sbin/iptables'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWORD -n -v --line-numbers'
+alias firewall=iptlist
+alias header='curl -I'
+alias headerc='curl -I --compress'
+alias rm='rm -I --preserve-root'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+alias apt-get="sudo apt-get"
+alias updatey="sudo apt-get --yes"
+alias update='sudo apt-get upgrade && sudo apt-get update'
+#alias update='yum update'
+#alias updatey='yum -y update'
+alias root='sudo -i'
+alias su='sudo -i'
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+alias nginxreload='sudo /usr/local/nginx/sbin/nginx -s reload'
+alias nginxtest='sudo /usr/local/nginx/sbin/nginx -t'
+alias lightyload='sudo /etc/init.d/lighttpd reload'
+alias lightytest='sudo /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t'
+alias httpdreload='sudo /usr/sbin/apachectl -k graceful'
+alias httpdtest='sudo /usr/sbin/apachectl -t && /usr/sbin/apachectl -t -D DUMP_VHOSTS'
+alias backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type local --taget /raid1/backups'
+alias nasbackup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01'
+alias s3backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01 --auth /home/scripts/admin/.authdata/amazon.keys'
+alias rsnapshothourly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotdaily='sudo  /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotweekly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotmonthly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias amazonbackup=s3backup
+alias playavi='mplayer *.avi'
+alias vlc='vlc *.avi'
+alias playwave='for i in *.wav; do mplayer "$i"; done'
+alias playogg='for i in *.ogg; do mplayer "$i"; done'
+alias playmp3='for i in *.mp3; do mplayer "$i"; done'
+alias nplaywave='for i in /nas/multimedia/wave/*.wav; do mplayer "$i"; done'
+alias nplayogg='for i in /nas/multimedia/ogg/*.ogg; do mplayer "$i"; done'
+alias nplaymp3='for i in /nas/multimedia/mp3/*.mp3; do mplayer "$i"; done'
+alias music='mplayer --shuffle *'
+alias dnstop='dnstop -l 5  eth1'
+alias vnstat='vnstat -i eth1'
+alias iftop='iftop -i eth1'
+alias tcpdump='tcpdump -i eth1'
+alias ethtool='ethtool eth1'
+alias iwconfig='iwconfig wlan0'
+alias meminfo='free -m -l -t'
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+alias cpuinfo='lscpu'
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
+alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
+alias wget='wget -c'
+alias ff4='/opt/firefox4/firefox'
+alias ff13='/opt/firefox13/firefox'
+alias chrome='/opt/google/chrome/chrome'
+alias opera='/opt/opera/opera'
+alias ff=ff13
+alias browser=chrome 
+alias df='df -H'
+alias du='du -ch'
+alias top='atop'
+alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
+alias mcdstats='/usr/bin/memcached-tool 10.10.27.11:11211 stats'
+alias mcdshow='/usr/bin/memcached-tool 10.10.27.11:11211 display'
+alias flushmcd='echo "flush_all" | nc 10.10.27.11 11211'
+alias cdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai'
+alias amzcdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon'
+alias cdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai --stdin'
+alias amzcdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon --stdin'
+
+###############################################################################################################
+A nice shell is key in bash imo; I color code my next line based on previous commands return code..
+
+bash_prompt_command()
+{
+    RTN=$?
+    prevCmd=$(prevCmd $RTN)
+}
+PROMPT_COMMAND=bash_prompt_command
+prevCmd()
+{
+    if [ $1 == 0 ] ; then
+        echo $GREEN
+    else
+        echo $RED
+    fi
+}
+if [ $(tput colors) -gt 0 ] ; then
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    RST=$(tput op)
+fi
+export PS1="\[\e[36m\]\u.\h.\W\[\e[0m\]\[\$prevCmd\]>\[$RST\]"
+
+And I liked your .{1,2,3,4} mapping; how I integrated it…
+
+dotSlash=""
+for i in 1 2 3 4
+do
+    dotSlash=${dotSlash}'../';
+    baseName=".${i}"
+    alias $baseName="cd ${dotSlash}"
+done
+
+And two random quick short ones..
+
+#progress bar on file copy. Useful evenlocal.
+alias cpProgress="rsync --progress -ravz"
+
+#I find it useful when emailing blurbs to people and want to illustrate long timeout in one pass.
+alias ping="time ping"
+
+###################################################################################################################################
+#The following is my version of the “up function” I came up with this morning:
+
+# Functions
+up () {
+        COUNTER=$1
+        while [[ $COUNTER -gt 0 ]]
+         do
+          UP="${UP}../"
+          COUNTER=$(( $COUNTER -1 ))
+         done
+        echo "cd $UP"
+        cd $UP
+        UP=''
+}
+
+###################################################################################################################################
+
+#Show text file without comment (#) lines (Nice alias for /etc files which have tons of comments like /etc/squid.conf)
+
+alias nocomment='grep -Ev '\''^(#|$)'\'''
+
+Usage e.g.:
+
+nocomment /etc/squid.conf
+
+##################################################################################################################################
+#Here are 4 commands i use for checking out disk usages.
+
+#Grabs the disk usage in the current directory
+alias usage='du -ch | grep total'
+alias usage=’du -ch 2> /dev/null |tail -1′
+#Gets the total disk usage on your machine
+alias totalusage='df -hl --total | grep total'
+#Shows the individual partition usages without the temporary memory values
+alias partusage='df -hlT --exclude-type=tmpfs --exclude-type=devtmpfs'
+#Gives you what is using the most space. Both directories and files. Varies on
+#current directory
+alias most='du -hsx * | sort -rh | head -10'
+
+alias ducks=’du -ck | sort -nr | head’
+#################################################################################################################################
+function f {
+	arg_path=$1 && shift
+	find $arg_path -wholename "*/path-to-ignore/*" -prune -o $* -print
+}
+################################################################################################################################
+
+That was a great list. Here are some of mine:
+
+I use cdbin to cd into a bin folder that is many subdirectories deep:
+
+alias cdbin='cd "/mnt/shared/Dropbox/My Documents/Linux/bin/"'
+
+I can never remember the sync command.
+
+alias flush=sync
+
+I search the command history a lot:
+
+alias hg='history|grep '
+
+My samba share lives inside a TrueCrypt volume, so I have to manually restart samba after TC has loaded.
+
+alias restsmb='sudo service smb restart'
+
+I’m surprised that nobody else suggested these:
+
+alias syi='sudo yum install'
+alias sys='sudo yum search'
+
+###############################################################################################################################
+alias up1="cd .."
+# edit multiple files split horizontally or vertically
+alias   e="vim -o "
+alias   E="vim -O "
+# directory-size-date (remove the echo/blank line if you desire)
+alias dsd="echo;ls -Fla"
+alias   dsdm="ls -FlAh | more"
+# show directories only
+alias   dsdd="ls -FlA | grep :*/"
+# show executables only
+alias   dsdx="ls -FlA | grep \*"
+# show non-executables
+alias   dsdnx="ls -FlA | grep -v \*"
+# order by date
+alias   dsdt="ls -FlAtr "
+# dsd plus sum of file sizes
+alias   dsdz="ls -Fla $1 $2 $3 $4 $5  | awk '{ print; x=x+\$5 } END { print \"total bytes = \",x }'"
+# only file without an extension
+alias noext='dsd | egrep -v "\.|/"'
+# send pwd to titlebar in puttytel
+alias   ttb='echo -ne "33]0;`pwd`07"'
+# send parameter to titlebar if given, else remove certain paths from pwd
+alias   ttbx="titlebar"
+# titlebar
+if [ $# -lt 1 ]
+then
+    ttb=`pwd | sed -e 's+/projects/++' -e 's+/project01/++' -e 's+/project02/++' -e 's+/export/home/++' -e 's+/home/++'`
+else
+    ttb=$1
+fi
+echo -ne "33]0;`echo $ttb`07"
+alias machine="echo you are logged in to ... `uname -a | cut -f2 -d' '`"
+alias info='clear;machine;pwd'
+##############################################################################################################################
+A couple you might mind useful.
+
+alias trace='mtr --report-wide --curses $1'
+alias killtcp='sudo ngrep -qK 1 $1 -d wlan0'
+alias usage='ifconfig wlan0 | grep 'bytes''
+alias connections='sudo lsof -n -P -i +c 15'
+
+################################################################################################################################
+alias up1="cd .."
+# edit multiple files split horizontally or vertically
+alias   e="vim -o "
+alias   E="vim -O "
+# directory-size-date (remove the echo/blank line if you desire)
+alias dsd="echo;ls -Fla"
+alias   dsdm="ls -FlAh | more"
+# show directories only
+alias   dsdd="ls -FlA | grep :*/"
+# show executables only
+alias   dsdx="ls -FlA | grep \*"
+# show non-executables
+alias   dsdnx="ls -FlA | grep -v \*"
+# order by date
+alias   dsdt="ls -FlAtr "
+# dsd plus sum of file sizes
+alias   dsdz="ls -Fla $1 $2 $3 $4 $5  | awk '{ print; x=x+\$5 } END { print \"total bytes = \",x }'"
+# only file without an extension
+alias noext='dsd | egrep -v "\.|/"'
+# send pwd to titlebar in puttytel
+alias   ttb='echo -ne "33]0;`pwd`07"'
+# send parameter to titlebar if given, else remove certain paths from pwd
+alias   ttbx="titlebar"
+# titlebar
+if [ $# -lt 1 ]
+then
+    ttb=`pwd | sed -e 's+/projects/++' -e 's+/project01/++' -e 's+/project02/++' -e 's+/export/home/++' -e 's+/home/++'`
+else
+    ttb=$1
+fi
+echo -ne "33]0;`echo $ttb`07"
+alias machine="echo you are logged in to ... `uname -a | cut -f2 -d' '`"
+alias info='clear;machine;pwd'
+# file tree of directories only
+alias dirtree="ls -R | grep :*/ | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+###############################################################################################################################
+Here are some tidbits I’ve setup to help troubleshoot things quickly
+
+This one pings a router quickly
+
+    alias pr=”ping \`netstat -nr| grep -m 1 -iE ‘default|0.0.0.0′ | awk ‘{print \$2}’\`”
+
+This export puts the current subnet as a variable (assuming class C) for easy pinging or nmaping
+
+    export SN=`netstat -nr| grep -m 1 -iE ‘default|0.0.0.0′ | awk ‘{print \$2}’ | sed ‘s/\.[0-9]*$//’ `
+    ping $SN.254
+    nmap -p 80 $SN.*
+
+This command which I just named ‘p’ will call ping and auto populate your current subnet. You’d call it like this to ping the router p 1
+
+    #!/bin/bash
+    [ “$#” -eq 1 ] || exit “1 argument required, $# provided”
+    echo $1 | grep -E -q ‘^[0-9]+$’ || exit “Numeric argument required, $1 provided”
+    export HOST=$1
+    export SUBNET=`netstat -nr| grep -m 1 -iE ‘default|0.0.0.0′ | awk ‘{print \$2}’`
+    export IP=`echo $SUBNET | sed s/\.[0-9]*$/.$HOST/`
+    ping $IP
+
+Quickly reload your .bashrc or .bash_profile
+
+    alias rl=’. ~/.bash_profile’
+############################################################################################################################
+    
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."

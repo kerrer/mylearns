@@ -1,0 +1,5 @@
+###grep
+grep can remove all the comments and all the blank lines from a configuration file.
+grep  -v ^# configfile | grep -v ^$
+grep -v ^# will remove all lines beginning with # (While keeping lines with comments after the setting, as in Whatever = Foo #sets Whatever to Foo)
+grep -v ^$ removes all blank lines.

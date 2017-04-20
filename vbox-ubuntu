@@ -1,0 +1,39 @@
+sudo apt-get install build-essential module-assistant
+ sudo m-a prepare
+ 
+# find out the device
+$ sudo blkid
+/dev/sr0: LABEL="VBOXADDITIONS_4.3.10_93012" TYPE="iso9660" 
+
+# Or use the lsblk command
+$ sudo lsblk -o NAME,TYPE,SIZE,LABEL,MOUNTPOINT,MODEL
+
+ mkdir cdrom
+ sudo mount /dev/sr0 ~/cdrom/
+ sudo ./VBoxLinuxAdditions.run 
+ 
+ # check loaded modules
+$ lsmod | grep -io vboxguest
+# check module 
+$ modinfo vboxguest
+
+$ lsmod | grep -io vboxguest | xargs modinfo | grep -iw version
+version:        4.3.10
+
+# create a directory in your home directory
+$ mkdir shared
+
+# mount using the mount command. SHARENAME is the name of the shared directory
+$ sudo mount -t vboxsf SHARENAME ~/shared
+
+# or
+$ sudo mount.vboxsf SHARENAME ~/shared
+
+You might comes across the following error message - "mount: wrong fs type, bad option".
+Or "The program 'mount.vboxsf' is currently not installed."
+
+This error is caused by a bug in VirtualBox due to which /sbin/mount.vboxsf points to a wrong path.
+
+To fix this, you have to use the full path to the mount.vboxsf command
+
+$ sudo /usr/lib/x86_64-linux-gnu/VBoxGuestAdditions/mount.vboxsf SHARENAME ~/shared

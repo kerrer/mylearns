@@ -1,0 +1,17 @@
+Font
+ : fonts.googleapi.com
+   typekit
+  
+vagatar
+   http://en.gravatar.com/
+   
+   
+   nodejs project:
+    http://blog.nodejs.org/2011/08/29/some-new-node-projects/
+Katello是一个系统管理引擎，为配置管理，订阅管理，配置，和内容管理提供了工作流。Katello将开源的系统管理工具集成到一个单一的解决方案中，来控制您机器的生命周期。
+ulp is a platform for managing repositories of content, such as software packages, and pushing that content out to large numbers of consumers. If you want to locally mirror all or part of a repository, host your own content in a new repository, manage content from multiple sources in one place, and push content you choose out to large numbers of clients in one simple operation, Pulp is for you!
+
+Avahi 是Zeroconf规范的开源实现，常见使用在Linux上。它可以在没有 DNS 服务的局域网里发现基于 zeroconf 协议的设备和服务
+
+
+ Let's encrypt 就是一个的证书授权中心, 能给大家提供免费的证书来使用 TLS(有时候 https/ssl 也是指同一回事,

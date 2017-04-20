@@ -1,0 +1,11 @@
+fedora http://rpmfusion.org/
+
+yum install yum-utils
+rpm -ivh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+yum repolist enabled | grep "mysql.*-community.*"
+yum repolist all | grep mysql
+sudo yum-config-manager --disable mysql56-community
+yum-config-manager --enable mysql57-community-dmr
+
+

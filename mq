@@ -1,0 +1,63 @@
+Why did you miss Sparrow, Starling, Kestrel, Amazon SQS, Beanstalkd, Kafka, IronMQ ?
+
+Message Queue Servers
+
+Message queue servers are available in various languages, Erlang (RabbitMQ), C (beanstalkd), Ruby (Starling or Sparrow), Scala (Kestrel, Kafka) or Java (ActiveMQ). A short overview can be found here
+
+Sparrow
+
+written by Alex MacCaw
+Sparrow is a lightweight queue written in Ruby that “speaks memcache”
+Starling
+
+written by Blaine Cook at Twitter
+Starling is a Message Queue Server based on MemCached
+written in Ruby
+stores jobs in memory (message queue)
+documentation: some good tutorials, for example the railscast about starling and workling or this blog post about starling
+Kestrel
+
+written by Robey Pointer
+Starling clone written in Scala (a port of Starling from Ruby to Scala)
+Queues are stored in memory, but logged on disk
+RabbitMQ
+
+RabbitMQ is a Message Queue Server in Erlang
+stores jobs in memory (message queue)
+Apache ActiveMQ
+
+ActiveMQ is an open source message broker in Java
+Beanstalkd
+
+written by Philotic, Inc. to improve the response time of a Facebook application
+in-memory workqueue service mostly written in C
+Docu: http://nubyonrails.com/articles/about-this-blog-beanstalk-messaging-queue
+Amazon SQS
+
+Amazon Simple Queue Service
+Kafka
+
+Written at LinkedIn in Scala
+Used by LinkedIn to offload processing of all page and other views
+Defaults to using persistence, uses OS disk cache for hot data (has higher throughput then any of the above having persistence enabled)
+Supports both on-line as off-line processing
+ZMQ
+
+The socket library that acts as a concurrency framework
+Faster than TCP, for clustered products and supercomputing
+Carries messages across inproc, IPC, TCP, and multicast
+Connect N-to-N via fanout, pubsub, pipeline, request-reply
+Asynch I/O for scalable multicore message-passing apps
+EagleMQ
+
+EagleMQ is an open source, high-performance and lightweight queue manager.
+Written in C
+Stores all data in memory and support persistence.
+It has its own protocol. Supports work with queues, routes and channels.
+IronMQ
+
+IronMQ
+Written in Go
+Fully managed queue service
+Available both as cloud version and on-premise
+I hope that this will be helpful for us. source

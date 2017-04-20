@@ -1,0 +1,3 @@
+ phpunit  --testsuite "DNode-PHP Client Suite" --filter testTrans
+
+phpunit --testsuite "DNode-PHP Client Suite" --filter testGuzzleClientGet -c tests/phpunit.xml tests

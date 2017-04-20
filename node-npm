@@ -1,0 +1,10 @@
+npm install -g
+npm install --save
+npm install --save-dev
+npm install will install both "dependencies" and "devDependencies"
+
+npm install --production will only install "dependencies"
+
+npm install --dev will only install "devDependencies"
+
+npm install -i --save-dev https://github.com/kerrer/grunt-contrib-nodeunit.git

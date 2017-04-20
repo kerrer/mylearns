@@ -1,0 +1,11 @@
+sudo rpm --import https://dl-ssl.google.com/linux/linux_signing_key.pub
+sudo dnf install google-chrome-stable --nogpgcheck
+sudo dnf upgrade google-chrome-stable --nogpgcheck
+
+
+======================================================================================
+[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1

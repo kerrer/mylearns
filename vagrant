@@ -1,0 +1,44 @@
+
+https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+plugins:
+  - vagrant plugin install vagrant-triggers
+  - vagrant plugin install vagrant-hostsupdater
+  - vagrant plugin install vagrant-omnibus
+  - vagrant plugin install vagrant-libvirt
+  - vagrant plugin install vagrant-vbguest (must) :  automatically installs the host's VirtualBox Guest Additions on the guest system
+vagrant plugin install vagrant-timezone
+  - vagrant plugin install vagrant-scp
+  - vagrant plugin install vagrant-cachier (must)  
+  - vagrant plugin install vagrant-hostmanager （must）
+  - vagrant plugin install vagrant-proxyconf
+vagrant plugin install vagrant-r10k
+ vagrant plugin install vagrant-puppet-install
+  
+
+vagrant plugin install vagrant-cachier : educe the amount of coffee you drink while waiting for boxes to be provisioned by sharing a common package cache among similar VM instances
+vagrant-hostmanager: manages the /etc/hosts file on guest machines (and optionally the host)
+
+gems:
+  - gem install librarian-puppet
+  - gem install librarian-chef
+
+
+vagrant package --base name --output /path/to/name.box
+
+VBoxManage list vms
+
+------------------------------------------------------------------------------------
+
+Packer is a tool for creating machine and container images for multiple platforms from a single source configuration.
+
+-------------------------------
+  veewee
+  packers
+  bento
+
+Authentication failure. Retrying
+==================
+wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O .ssh/authorized_keys
+chmod 700 .ssh
+chmod 600 .ssh/authorized_keys
+chown -R vagrant:vagrant .ssh

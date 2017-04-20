@@ -1,0 +1,23 @@
+PHPLOC  
+   a tool for quickly measuring the size and analyzing the structure of a PHP project.
+   https://github.com/sebastianbergmann/phploc
+   
+PHP_CodeSniffer
+    a PHP5 script that tokenises and "sniffs" PHP, JavaScript and CSS files to detect violations of a defined coding standard. It is an essential development tool that ensures your code remains clean and consistent. It can also help prevent some common semantic errors made by developers
+    http://pear.php.net/manual/en/package.php.php-codesniffer.intro.php
+  
+PHP_Depend  
+    http://pdepend.org/
+    PHP_Depend is a small program that performs static code analysis on a given source base
+    
+PHPMD
+    It takes a given PHP source code base and look for several potential problems within that source
+    http://phpmd.org/
+    
+PHPCPD
+     a tool for quickly measuring the size and analyzing the structure of a PHP project
+     https://github.com/sebastianbergmann/phploc
+
+phpDox
+     The PHP Documentation Generator
+     http://phpdox.de/getting-started.html

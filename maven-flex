@@ -1,0 +1,12 @@
+java -jar flex-sdk-converter-1.0.0-SNAPSHOT.jar /work/flex-red5/flex-sdk /work/flex-red5/flex-maven
+
+
+
+mvn archetype:generate \
+      -DgroupId=com.yixiang  \
+	  -DartifactId=chat \
+	  -DinteractiveMode=false \
+      -DarchetypeRepository=http://repository.sonatype.org/content/groups/public \
+      -DarchetypeGroupId=net.flexmojos.oss \
+      -DarchetypeArtifactId=flexmojos-archetypes-application \
+      -DarchetypeVersion=7.0.1

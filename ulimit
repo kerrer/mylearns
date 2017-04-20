@@ -1,0 +1,9 @@
+/etc/security/limits.d/90-nproc.conf
+For those looking to try and figure out why they are limited to [for instance] 1024 max theads for a given user, also note that it reads the /etc/security/limits.conf file and other /etc/security/limits.d/* files
+* hard nofile 94000
+* soft nofile 94000
+* hard noproc 64000
+* soft noproc 64000
+
+
+sysctl -p

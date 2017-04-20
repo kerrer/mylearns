@@ -1,0 +1,21 @@
+ sudo /usr/local/coreseek/bin/searchd --config /etc/sphinx.conf
+sudo /usr/local/coreseek/bin/search   --config /etc/sphinx.conf --index t_xwzx_list  "糖尿病"
+ sudo /usr/local/coreseek/bin/indexer --config /etc/sphinx.conf --all
+
+increament 
+6、创建更新所有索引
+ /usr/local/coreseek/bin/indexer -c /etc/sphinx.conf --all --rotate
+如果配置正确的话，现在辅助表sph_counter中已经添加了一条数据
+
+7、更新增量索引
+$sudo /usr/local/coreseek/bin/indexer delta_jbk_info -c /etc/sphinx.conf --rotate
+
+8、合并增量索引到主索引
+$sudo /usr/local/coreseek/bin/indexer --merge jbk_info  delta_jbk_info -c /etc/sphinx.conf --rotate
+
+9、启动sphinx的守护进程searchd
+$sudo /usr/local/coreseek/bin/searchd -c /usr/local/coreseek/dict/csft_mysql.conf
+
+
+ sudo indexer m_question_answer -c /etc/sphinxsearch/sphinx.conf
+ sudo indexer ixc -c /etc/sphinxsearch/sphinx.conf

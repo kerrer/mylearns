@@ -1,0 +1,2 @@
+Photon是一款非常不错的游戏服务端引擎，但是网上的入门教程太少了，特别是中文版的。小弟就自己琢磨吧，下面一系列是对Photon的研究过程，如有哪个地方写的有误，望请前辈指教。
+首先去https://www.photonengine.com/en/OnPremise/Download下载服务器端SDK，需要登录的，就先注册一个账号吧.

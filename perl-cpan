@@ -1,0 +1,112 @@
+perl -MCPAN -e shell
+
+o conf urllist
+o conf urllist push http://ftp.wayne.edu/cpan/
+o conf urllist commit
+
+Other commands
+
+o conf urllist shift
+o conf urllist pop
+
+
+o conf make_install_make_command 'sudo make'
+
+
+o conf prerequisites_policy follow
+o conf commit
+
+=====================================================================================================================================
+
+curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+cpanm constant --sudo
+cpanm install --sudo App::perlbrew
+
+===========================================
+perlbrew:
+perlbrew init
+ 
+# Pick a preferred CPAN mirror
+perlbrew mirror
+ 
+# See what is available
+perlbrew available
+ 
+# Install some Perls
+perlbrew install 5.18.2
+perlbrew install perl-5.8.1
+perlbrew install perl-5.19.9
+==================================
+module path: perl -MTie::IxHash -e'print $_ . " => " . $INC{$_} . "\n" for keys %INC'
+             perldoc -lm Tie::IxHash 
+             perl -MList::Util -e'print $INC{"List/Util.pm"} . "\n"'
+
+list module: instmodsh
+
+
+
+=-===========================================================
+CPANPLUS 的使用--装载模板的好工具(转载)  
+
+    
+今天从perl hacks上了解到CPANPLUS这个好东西,平时我们用的是CPAN Shell来装模板,其实用CPANPLUS更加好用，为什么啦，因为默认的cpan命令安装时，如果依赖到别的包时，cpan就停止在那不动了，但如果使用CPANPLUS的话，就能自动给依赖的模块也装好.
+听讲 Perl5.10 现在默认有 CPANPLUS Shell .
+如果象我用的5.8就得在装这个啦
+
+1. 安装 CPANPLUS: cpan  CPANPLUS
+2. 进入 CPANPLUS: cpanp
+3. 设置镜象  s reconfigure
+4. 选择镜象地址 选择7 Select mirrors
+    选择 No 
+    选择 1 镜象
+    选择 3 Asia
+    选择 9 China
+    选择镜象地址,也一样按上面的数字,最后面一个是退出这个,记的退出时保存.
+    选择 9 Save and exit
+
+
+5. 取消安装测试（可选）
+如果觉得每次测试太花时间，可以将测试取消:
+# 取消安装过程中的测试
+
+s conf skiptest 1
+# 取消提问回答是否按Y
+
+s conf prereqs 1
+s save #记的存一下
+ 
+
+ 
+
+CPANPLUS 使用
+1. CPANPLUS 中安装模块,按i:
+
+CPAN Terminal> i  Bundle::CPAN
+Tie::IxHash
+2. CPANPLUS 中删除模块,按u:
+
+
+CPAN Terminal> u YAML
+3. CPANPLUS 中查找模块,按m:
+
+CPAN Terminal>m Smart::Comments
+4. CPANPLUS 中查找作者的模块,按a:
+
+CPAN Terminal>a kai
+
+5. CPANPLUS 中更新所有有新版本的模块,按下o:
+
+
+CPAN Terminal> o
+ 
+    1     5.22         5.24     AnyEvent                             MLEHMANN 
+    2     0.01         1.024    Apache::Filter                       KWILLIAMS
+    3     0.01         0.11     Apache::Module                       DOUGM    
+    4     0.09         0.10     Apache::Reload                       PHRED
+6. 没事也可以更新 CPANPLUS 自己:
+
+CPAN Terminal>s selfupdate all
+
+还有很多小功能，以后可能会用这个换掉CPANPLUS本身
+
+可以按e来加入目录到@INC,可以按x来更新index.

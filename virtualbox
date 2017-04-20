@@ -1,0 +1,25 @@
+vboxmanage clonehd windowsxpsp3.vmdk windowsxpsp3.vdi --format VDI
+VBoxManage  modifyhd windowsxpsp3.vmdk --compact
+VBoxManage internalcommands sethduuid /path/to/virtualdisk.vdi
+sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.0.14-105127.vbox-extpack
+
+
+-----------------------
+web service:
+vi /etc/vbox/vbox.cfg 
+VBOXWEB_USER=max 
+VBOXWEB_HOST=0.0.0.0 
+VBOXWEB_PORT=18083 
+VBOXWEB_TIMEOUT=300 
+VBOXWEB_CHECK_INTERVAL=5 
+VBOXWEB_THREADS=100 
+VBOXWEB_KEEPALIVE=100 
+VBOXWEB_LOGFILE=/var/log/vboxweb.log [chown max:max]
+
+vboxweb-service.service
+
+
+VBoxManage setproperty websrvauthlibrary null
+===================================================================
+
+VBoxManage guestproperty enumerate <vmname>

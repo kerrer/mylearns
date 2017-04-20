@@ -1,0 +1,36 @@
+server {
+  listen *:80;
+  server_name           rack3.max.com;
+  client_max_body_size 128M;
+  
+  set $maintenance "off";
+  if ($maintenance = "on") {
+      return 503;
+  }
+  
+  index  index.html index.htm index.jsp;
+
+  access_log            /var/log/nginx/rack3.max.com.access.log combined;
+  error_log             /var/log/nginx/rack3.max.com.error.log;
+
+  location / {
+    proxy_pass            http://puppet_rack_tomcat8085app;
+    proxy_read_timeout    90;
+    proxy_connect_timeout 90;
+    proxy_redirect        off;
+
+    proxy_set_header      host $host;
+    proxy_set_header      X-Real-IP $remote_addr;
+    proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+
+  }
+}
+
+    
+upstream puppet_rack_app {
+  keepalive 20;
+  server     www.yx129.com max_fails=2  fail_timeout=10s;
+}
+
+#worker_processes  8;
+#worker_cpu_affinity 000000000000000000000111 000000000000000000111000 000000000000000111000000 000000000000111000000000 000000000111000000000000 000000111000000000000000 000111000000000000000000 111000000000000000000000;

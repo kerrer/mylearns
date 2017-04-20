@@ -1,0 +1,4 @@
+Host *
+    User                   max
+    StrictHostKeyChecking  no
+    PubkeyAcceptedKeyTypes ssh-dss   

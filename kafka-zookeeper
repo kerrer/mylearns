@@ -1,0 +1,67 @@
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+--------------------------------single
+ickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+initLimit=5
+syncLimit=2
+server.1=zoo1:2888:3888
+server.2=zoo2:2888:3888
+server.3=zoo3:2888:3888
+--------------------------------cluster
+bin/zkServer.sh start
+bin/zkCli.sh -server 127.0.0.1:2181
+ls /
+create /zk_test my_data
+get /zk_test
+set /zk_test junk
+get /zk_test
+delete /zk_test
+========================================================================
+bin/kafka-server-start.sh config/server.properties
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+
+------------------------------------single
+cp config/server.properties config/server-1.properties
+cp config/server.properties config/server-2.properties
+config/server-1.properties:
+    broker.id=1
+    port=9093
+    log.dir=/tmp/kafka-logs-1
+
+config/server-2.properties:
+    broker.id=2
+    port=9094
+    log.dir=/tmp/kafka-logs-2
+-------------------------------------cluster
+bin/kafka-server-start.sh config/server-1.properties &
+bin/kafka-server-start.sh config/server-2.properties &
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic
+bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-replicated-topic
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-replicated-topic
+--------------------------------------
+========================================================================
+hbase-site.xml for Standalone HBase
+<configuration>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>file:///home/testuser/hbase</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/home/testuser/zookeeper</value>
+  </property>
+</configuration>
+bin/start-hbase.sh 
+./bin/hbase shell
+./bin/stop-hbase.sh
+========================================================================
+mkdir -p /data/db
+mongod --dbpath <path to data directory>

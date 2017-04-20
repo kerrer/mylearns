@@ -1,0 +1,24 @@
+Edit /etc/sysconfig/docker and add "-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"
+
+consul
+----------
+docker run --name consul1 -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=172.17.0.1
+
+manager
+----------
+docker run --name manage1 -d -p 4000:4000 swarm manage -H :4000 --replication --advertise 172.17.0.1:4000 consul://172.17.0.1:8500
+docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise <manager0_ip>:4000 consul://<consul0_ip>:8500
+
+node
+------------
+docker run --name node1 -d swarm join --advertise=172.17.0.1:2375 consul://172.17.0.1:8500
+docker run -d swarm join --advertise=<node_ip>:2375 consul://<consul0_ip>:8500
+
+test
+----------
+docker -H :4000 info
+docker -H :4000 run hello-world
+
+
+flock
+================

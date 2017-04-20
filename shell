@@ -1,0 +1,12 @@
+1.-----------------------------------------------------------------------------------------------
+while : ; do
+  for file in $(find /directory -type f -name "*.[ew]ar"); do
+    some_command "${file}"           # Execute some command for the file
+    mv "${file}" /target/directory/  # Move the file to some directory
+  done
+  sleep 60s                          # Maybe sleep for a while before searching again!
+done
+
+2.------------------------------------------------------------------------------------------
+find . -type f -iname '*.cpp' -exec mv -t ./test/ {} \+
+find . -type f -iname '*.cpp' -exec mv {} ./test/ +

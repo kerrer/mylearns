@@ -1,0 +1,17 @@
+php package:
+  pear
+     1)creae shared pear libraries:
+     pear config-create /home/user/pear .pearrc
+     add ~/pear/bin to your path as the first entry in .bashrc
+     pear install -o PEAR
+     2)
+     pear
+      pear version
+      pear config-get php_dir [check where PEAR installs .php files]
+      php --ini  [ which configuration file is used by your PHP installation]
+      php -c /path/to/php.ini -r 'echo get_include_path()."\n";' [check PHP's include_path setting ]
+  pyrus.phar
+    function pyrus(){ /usr/bin/php ~/pear/pyrus.phar "$@" ;}
+  composer.phar
+    mv composer.phar composer; composer install
+  pecl

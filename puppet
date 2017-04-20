@@ -1,0 +1,19 @@
+puppet module --modulepath=/work/puppet-modules  install ajcrowe-supervisord
+puppet module install  --modulepath=/work/puppet-modules --module_repository=http://localhost:8080 max-lamp
+
+
+gem install puppet-forge-server
+bundle exec bin/puppet-forge-server -m modules/ -x https://forgeapi.puppetlabs.com -x http://my.local.pulp/pulp_puppet/forge/repository/demo
+bundle exec bin/puppet-forge-server -m modules/
+puppet-forge-server -m modules/
+puppet module install --module_repository=http://localhost:8080 puppetlabs-stdlib
+
+
+
+puppetlabs/r10k  R10k provides a general purpose toolset for deploying Puppet environments and modules
+
+
+Librarian-puppet is a bundler for your puppet infrastructure. You can use librarian-puppet to manage the puppet modules your infrastructure depends on, whether the modules come from the
+
+
+puppet module list --modulepath modules  --tree

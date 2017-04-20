@@ -1,0 +1,2 @@
+docker run -it --rm -v "$PWD"/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml -p 8889:8080 -v /job/wf-mplatformxx/wf-mplatformxx-providers/target/wf-mplatformxx-providers.war:/usr/local/tomcat/webapps/provider.war tomcat:8.0-jre8
+docker run -it --rm -v "$PWD"/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml -p 8080:8080 -v /job/wf-mplatformxx/wf-mplatformxx-proxy/target/wf-mplatformxx-proxy.war:/usr/local/tomcat/webapps/services.war tomcat:8.0-jre8

@@ -1,0 +1,4 @@
+mvn archetype:generate -DgroupId=com.javahash.example  -DartifactId=Spring3HelloWorld  -DarchetypeArtifactId=maven-archetype-quickstart  -DinteractiveMode=false
+
+
+mvn archetype:generate -DgroupId=com.max.kerrer  -DartifactId=dubboHello  -DarchetypeArtifactId=maven-archetype-quickstart  -DinteractiveMode=false

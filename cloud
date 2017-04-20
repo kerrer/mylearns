@@ -1,0 +1,52 @@
+openstack
+cloudstack
+OpenNebula
+Eucalyptus
+
+
+=====================================================================================================================================
+Fuel is an open source deployment and management tool for OpenStack. Developed as an OpenStack community effort, it provides an intuitive, GUI-driven experience for deployment and management of OpenStack, related community projects and plug-ins.
+
+devstack
+
+================================================================================================================================================
+Use Docker Swarm if:
+You want to use the familiar Docker API to launch Docker containers on Mesos.
+Swarm may eventually provide an API to talk to Kubernetes (even K8s-Mesos) too.
+See: http://www.techrepublic.com/article/docker-and-mesos-like-peanut-butter-and-jelly/
+
+Use Kubernetes-Mesos if:
+You want to launch K8s Pods, which are groups of containers co-scheduled and co-located together, sharing resources.
+You want to launch a service alongside one or more sidekick containers (e.g. log archiver, metrics monitor) that live next to the parent container.
+You want to use the K8s label-based service-discovery, load-balancing, and replication control.
+See http://kubernetesio.blogspot.com/2015/04/kubernetes-and-mesosphere-dcos.html
+
+Use Marathon if:
+You want to launch Docker or non-Docker long-running apps/services.
+You want to use Mesos attributes for constraint-based scheduling.
+You want to use Application Groups and Dependencies to launch, scale, or upgrade related services.
+You want to use health checks to automatically restart unhealthy services or rollback unhealthy deployments/upgrades.
+You want to integrate HAProxy or Consul for service discovery.
+You want to launch and monitor apps through a web UI or REST API.
+You want to use a framework built from the start with Mesos in mind.
+
+Use Chronos if:
+You want to launch Docker or non-Docker tasks that are expected to exit.
+You want to schedule a task to run at a specific time/schedule (a la cron).
+You want to schedule a DAG workflow of dependent tasks.
+You want to launch and monitor jobs through a web UI or REST API.
+You want to use a framework built from the start with Mesos in mind.
+
+==================================================================================================
+Apache Mesos是一个集群管理器，提供了有效的、跨分布式应用或框架的资源隔离和共享，可以运行Hadoop、MPI、Hypertable、Spark。
+
+=================================================================================================================
+CONSUL VS. ZOOKEEPER, DOOZERD, ETCD
+
+===============================================================================================================
+
+Atomic是一个用于运行Docker容器的原型系统。该举措是Red Hat针对行业中所反映出来的、对CoreOS的兴趣的一种回应，CoreOS是一个基于ChromeOS之上的用于托管Docker容器的系统
+Project Photon是VMware为容器化应用而设计的轻量级的操作系统。类似RedHat的 Atomic项目，以及Ubuntu的Snappy项目
+===============
+Docker Containers (includes Content Update Program): Build and Deploy with Kubernetes, Flannel, Cockpit, and Atomic (Negus Live Linux)
+

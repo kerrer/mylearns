@@ -1,0 +1,75 @@
+What you want is SELECT ... FOR UPDATE from within the context of a transaction. SELECT FOR UPDATE puts an exclusive lock on the rows selected, just as if you were executing UPDATE. It also implicitly runs in READ COMMITTED isolation level regardless of what the isolation level is explicitly set to. Just be aware that SELECT ... FOR UPDATE is very bad for concurrency and should only be used when absolutely necessary. It also has a tendency to multiply in a codebase as people cut and paste.
+
+Here's an example session from the Sakila database which demonstrates some of the behaviors of FOR UPDATE queries.
+
+First, just so we're crystal clear, set the transaction isolation level to REPEATABLE READ. This is normally unnecessary, as it is the default isolation level for InnoDB:
+
+session1> SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+session1> BEGIN;
+session1> SELECT first_name, last_name FROM customer WHERE customer_id = 3;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| LINDA      | WILLIAMS  |
++------------+-----------+
+1 row in set (0.00 sec)    
+In the other session, update this row. Linda got married and changed her name:
+
+session2> UPDATE customer SET last_name = 'BROWN' WHERE customer_id = 3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+Back in session1, because we were in REPEATABLE READ, Linda is still LINDA WILLIAMS:
+
+session1> SELECT first_name, last_name FROM customer WHERE customer_id = 3;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| LINDA      | WILLIAMS  |
++------------+-----------+
+1 row in set (0.00 sec)
+But now, we want exclusive access to this row, so we call FOR UPDATE on the row. Notice that we now get the most recent version of the row back, that was updated in session2 outside of this transaction. That's not REPEATABLE READ, that's READ COMMITTED
+
+session1> SELECT first_name, last_name FROM customer WHERE customer_id = 3 FOR UPDATE;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| LINDA      | BROWN     |
++------------+-----------+
+1 row in set (0.00 sec)
+Let's test out the lock set in session1. Note that session2 cannot update the row.
+
+session2> UPDATE customer SET last_name = 'SMITH' WHERE customer_id = 3;
+ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+But we can still select from it
+
+session2> SELECT c.customer_id, c.first_name, c.last_name, a.address_id, a.address FROM customer c JOIN address a USING (address_id) WHERE c.customer_id = 3;
++-------------+------------+-----------+------------+-------------------+
+| customer_id | first_name | last_name | address_id | address           |
++-------------+------------+-----------+------------+-------------------+
+|           3 | LINDA      | BROWN     |          7 | 692 Joliet Street |
++-------------+------------+-----------+------------+-------------------+
+1 row in set (0.00 sec)
+And we can still update a child table with a foreign key relationship
+
+session2> UPDATE address SET address = '5 Main Street' WHERE address_id = 7;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+session1> COMMIT;
+Another side effect is that you greatly increase your probability of causing a deadlock.
+
+In your specific case, you probably want:
+
+BEGIN;
+SELECT id FROM `items` WHERE `status`='pending' LIMIT 1 FOR UPDATE;
+-- do some other stuff
+UPDATE `items` SET `status`='working', `updated`=NOW() WHERE `id`=<selected id>;
+COMMIT;
+If the "do some other stuff" piece is unnecessary and you don't actually need to keep information about the row around, then the SELECT FOR UPDATE is unnecessary and wasteful and you can instead just run an update:
+
+UPDATE `items` SET `status`='working', `updated`=NOW() WHERE `status`='pending' LIMIT 1;
+Hope this makes some sense.
+
+============================================================
+show status like '%lock%';
+SHOW ENGINE INNODB STATUS\G

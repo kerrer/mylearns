@@ -1,0 +1,16 @@
+
+ //select specific test method
+gradle test --tests org.gradle.SomeTest.someFeature
+
+//select specific test class
+gradle test --tests org.gradle.SomeTest
+
+//select all tests from package
+gradle test --tests org.gradle.internal*
+
+//select all ui test methods from integration tests by naming convention
+gradle test --tests *IntegTest*ui*
+
+//selecting tests from different test tasks
+gradle test --tests *UiTest integTest --tests *WebTest*ui
+Read more here http://www.gradle.org/docs/1.10/release-notes#executing-specific-tests-from-the-command-line

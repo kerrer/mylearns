@@ -1,0 +1,24 @@
+kvm:
+========================fedora=================================
+egrep '(vmx|svm)' /proc/cpuinfo
+dnf groupinstall "Virtualization"
+dnf install qemu-img  libvirt libvirt-python libvirt-client
+	- qemu-kvm = QEMU emulator
+	- qemu-img = QEMU disk image manager
+	- virt-install = Command line tool to create virtual machines.
+	- libvirt = Provides libvirtd daemon that manages virtual machines and controls hypervisor.
+	- libvirt-client = provides client side API’s for accessing servers and also provides virsh utility which provides command line tool to manage virtual machines.
+	- virt-viewer – Graphical console
+virt-install  --name=itzgeekguest  --ram=1024  --vcpus=1  --cdrom=/tmp/CentOS-6.5-x86_64-minimal.iso --os-type=linux --os-variant=rhel6  --network bridge=br0 --graphics=spice  --disk path=/var/lib/libvirt/images/itzgeekguest.dsk,size=4
+	The above command uses bridged networking “br0” for allowing virtual machines to communicate with outside network, you can find a tutorial on creating bridged networking on Fedora 22.
+	–name – Name of the Virtual machine
+	–ram – Memory size in MB
+	–vcpus – Virtal cpu’s in numbers
+	–cdrom – Location of the ISO image
+	–os-type – OS type like Linux, Windows and Unix
+	–os-variant – OS variant like rhel 6, solaris
+	–network – Networking
+	–graphics – Guest display settings
+	–disk path – Location of the disk with size of 4 GB
+
+Graphical Mode:virt-manager

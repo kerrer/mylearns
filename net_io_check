@@ -1,0 +1,15 @@
+2）查看实时流量
+vnstat -l -i eth0 -ru
+
+注：-ru表示将显示单位在bytes和bits之间切换。如果要直接单位显示bytes，可以编辑/etc/vnstat.conf将RateUnit值设为0。
+
+3）计算一段时间内的流量平均值
+
+vnstat -tr 10 -ru
+
+
+yum -y install iotop
+另外可以通过dd命令来简单测试一下磁盘写操作的性能，例如：
+
+ dd if=/dev/zero of=test bs=64k count=4k oflag=dsync
+命令执行完成后会给出磁盘写操作的平均速度。

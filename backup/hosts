@@ -1,0 +1,9 @@
+127.0.0.1		localhost.localdomain localhost
+::1		localhost6.localdomain6 localhost6
+192.168.56.28 rack.max.com
+192.168.56.28 rack2.max.com
+192.168.56.28 rack3.max.com
+192.168.56.11 yx.max.com
+192.168.8.200 200.test.wlyy.yx129.com
+192.168.56.41 zabbix.max.com
+192.168.56.27 pl.max.com

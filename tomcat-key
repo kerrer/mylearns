@@ -1,0 +1,18 @@
+/usr/local/java/jdk1.7.0_79/bin/keytool  -genkey -alias tomcat  -keyalg RSA -keystore server.keystore
+/usr/local/java/jdk1.7.0_79/bin/keytool -genkey -keystore sslKey -keyalg rsa -alias ssl
+/usr/local/java/jdk1.7.0_79/bin/keytool  -export -alias tomcat  -file server.crt -keystore server.keystore
+
+/usr/local/java/jdk1.7.0_79/bin/keytool  -import -alias tomcat -file /etc/ssl/certs/tomcat.crt  -keystore /usr/local/java/jdk1.7.0_79/jre/lib/security/cacerts 
+
+/usr/local/java/jdk1.7.0_79/bin/keytool --list --keystore android.jks --protected
+/usr/local/java/jdk1.7.0_79/bin/keytool  --list -keystore /usr/local/java/jdk1.7.0_79/jre/lib/security/cacerts
+
+==============================================================================================================================================================
+
+openssl genrsa -des3 -out server.key 1024
+openssl req -new -key server.key -out server.csr
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+openssl genrsa -out ca-key.pem 1024
