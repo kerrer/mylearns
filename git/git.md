@@ -159,3 +159,12 @@ tig
 prevent if subdir have .git
 ========================================================================
 copy  to .git/hooks/
+
+
+branch:
+===================
+
+show: git branch
+add: git branch production  && git push origin production
+
+delete: git branche -d master && git push origin :master
