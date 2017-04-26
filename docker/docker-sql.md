@@ -32,3 +32,7 @@ client:
 ======================================================================
  docker run --name mongo -d -p 27017:27017 mongo
  docker run --name mongo-express -d --link mongo:mongo -p 8081:8081 mongo-express
+
+neo4j
+===============
+docker run -d --name neo4j --publish=7474:7474 --publish=7687:7687 --env=NEO4J_AUTH=none    neo4j
