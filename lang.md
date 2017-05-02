@@ -1,26 +1,39 @@
 perl: cpan perlbrew  CPANPLUS
-nodejs: npm cnpm
+
 ruby: rvm  rbenv
+
 groovy.grail.gradle sdkman 
+
 python:
   -- virtualenv  virtualenvwrapper pyvenv pyenv pythonz
   -- pip: pip install --upgrade pip
+  
 scala: sbt
+
 clojure: Leiningen
+
 php: composer
+
 typesafe: activator
+
 powershell: nuget chocolatey Ninite
+
+
+
 donet: mono
+
 gnome: vala Genie
+
 nodejs: 
   -- nodebrew https://github.com/hokaccha/nodebrew
   -- nvm https://github.com/creationix/nvm
   -- cnpm: npm install cnpm -g --registry=https://registry.npm.taobao.org
+  
 go: gvm
+
 java: jenv
-Elixir is a dynamic, functional language designed for building scalable and maintainable applications./Erlang
-------------
-NuGet is the package manager for the Microsoft development platform including .NET. The NuGet client tools provide the ability to produce and consume packages. The NuGet Gallery is the central package repository used by all package authors and consumers.
+
+
 
 
 ========================================
