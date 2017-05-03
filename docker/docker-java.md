@@ -25,17 +25,23 @@ docker run -d --name sonarqube --link postgres:postgres \
     -e SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar \
     sonarqube
 
-
-nexus3
+#maven私服
+1. nexus3 admin:mmmm
 ==================================
 mkdir /some/dir/nexus-data && chown -R 200 /some/dir/nexus-data
 docker run -d --restart=always -p 2525:8081 --name nexus -v /work/data/nexus:/nexus-data sonatype/nexus3
 
-#maven私服
-artifactory
+2. artifactory
 =========================
-docker run -d --name artifactory-4.1.0 --volumes-from=artifactory-4.0.0 -p 8081:8081 docker.bintray.io/jfrog/artifactory-oss:4.1.0
-docker rm artifactory-4.0.0
+docker run --name artifactory -d -v /work/data/jfrog/artifactory:/var/opt/jfrog/artifactory -p 3636:8081 docker.bintray.io/jfrog/artifactory-oss
+
+admin password or mmmm
+docker run -p 4646:8080 mattgruter/artifactory
+
+3. admin 1t
+=========================================
+docker run -d --name archiva -h archiva -d -p 4545:8080 -v /work/data/archiva:/archiva-data xetusoss/archiva
+
 
 jenkins【CI】(单机/分布式):3131
 ===============================================
