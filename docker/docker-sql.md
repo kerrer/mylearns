@@ -11,6 +11,8 @@ client:
  - docker run -it --link mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
  - docker run -it --rm mysql mysql -hsome.mysql.host -usome-mysql-user -p
 
+docker run --name myadmin -d --link mysql:db -p 8182:80 phpmyadmin/phpmyadmin
+
  
 mariadb
 ===================

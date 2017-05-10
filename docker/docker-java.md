@@ -36,7 +36,7 @@ docker run -d --restart=always -p 2525:8081 --name nexus -v /work/data/nexus:/ne
 docker run --name artifactory -d -v /work/data/jfrog/artifactory:/var/opt/jfrog/artifactory -p 3636:8081 docker.bintray.io/jfrog/artifactory-oss
 
 admin password or mmmm
-docker run -p 4646:8080 mattgruter/artifactory
+docker run --name artifactory -d  -p 4646:8080 mattgruter/artifactory
 
 3. admin 1t
 =========================================
@@ -223,7 +223,7 @@ keytool -export -trustcacerts -alias tomcat -file server.cer -keystore server.ke
 cp server.cer /usr/java/latest/jre/lib/security/server.cer
 keytool -import -trustcacerts -alias tomcat -keystore "/usr/java/latest/jre/lib/security/cacerts" -file "/usr/java/latest/jre/lib/security/server.cer" -storepass changeit
 2. 
-docker run -d -p 8080:8080 -p 8443:8443 --name cas -v /etc/cas:/cas-overlay/etc/cas apereo/cas:v5.0.1
+docker run -d -p 8080:8080 -p 8443:8443 --name cas --link mysql:db -v /etc/cas:/cas-overlay/etc/cas apereo/cas:v5.0.5
 3. 
 ./gradlew clean build
 ./gradlew bootRun

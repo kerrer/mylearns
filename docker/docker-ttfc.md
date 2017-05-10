@@ -36,4 +36,10 @@ docker run -d  --restart=always -p 80:80 --name proxy -v /var/run/docker.sock:/v
 ========================================================================
 docker run -d  --name mysql-backup --restart=always -e DB_USER=root -e DB_PASS=mmmm -e DB_DUMP_FREQ=3600 -e DB_DUMP_BEGIN=+0 -e DB_DUMP_TARGET=/mysql/back --link mysql:db --volumes-from busybox deitch/mysql-backup
 
-
+ofbiz
+======================
+Open a browser and go to 
+http://127.0.0.1:8080/ecommerce/control/main for the ecommerce application or 
+https://127.0.0.1:8443/webtools/control/main for the WebTools application or
+https://127.0.0.1:8443/catalog/control/main for the Catalog Manager application.
+The default administrative account is username: "admin", password: "ofbiz".
