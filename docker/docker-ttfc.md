@@ -43,3 +43,7 @@ http://127.0.0.1:8080/ecommerce/control/main for the ecommerce application or
 https://127.0.0.1:8443/webtools/control/main for the WebTools application or
 https://127.0.0.1:8443/catalog/control/main for the Catalog Manager application.
 The default administrative account is username: "admin", password: "ofbiz".
+
+
+
+docker run -it --rm microsoft/powershell

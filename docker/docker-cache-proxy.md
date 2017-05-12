@@ -136,5 +136,13 @@ docker run --name nginx -d -p 8082:80 \
 nginx
 
 
+docker run -d -p 8388:8388/tcp -p 8388:8388/udp smounives/shadowsocksr-docker -s 0.0.0.0 -p 8388 -k mmmm -m aes-256-cfb -o tls1.2_ticket_auth -O auth_sha1_v4
 
-
+docker create \
+--name=openvpn-as \
+-v <path to data>:/config \
+-e PGID=<gid> -e PUID=<uid> \
+-e TZ=<timezone> \
+-e INTERFACE=<interface> \
+--net=host --privileged \
+linuxserver/openvpn-as
